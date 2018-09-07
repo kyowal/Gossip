@@ -45,35 +45,61 @@ $types = array("Mannual", "Feed","Video");
 <div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-lg">
     <div class="modal-content">
-          <div class="card-body text-center">
-            <h4 class="card-title">Special title treatment</h4>
-            <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-          </div>
-            <div class=" card col-8 offset-2 my-2 p-3">
-          <form>
-            <div class="form-group">
-              <label for="listname">List name</label>
-              <input type="text" class="form-control" name="listname" id="listname" placeholder="Enter your listname">
-            </div>
-            <div class="form-group">
-              <label for="datepicker">Deadline</label>
-              <input  type="text" class="form-control" name="datepicker" id="datepicker" placeholder="Pick up a date">
-            </div>
-            <div class="form-group">
-                                    <label for="datepicker">Add a list item</label>
-                <div class="input-group">
-
-                  <input type="text" class="form-control" placeholder="Add an item" aria-label="Search for...">
-                  <span class="input-group-btn">
-                    <button class="btn btn-secondary" type="button">Go!</button>
-                  </span>
-                </div>
-              </div>
-           <div class="form-group text-center">
-             <button type="submit" class="btn btn-block btn-primary">Sign in</button>
-          </div>
-        </form>
-    </div>
+		<div class="card-body text-center">
+			<h4 class="card-title">Special title treatment</h4>
+			<p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+		</div>
+		<div class=" card col-8 offset-2 my-2 p-3">
+		<div class="tabs">
+			<ul class="nav nav-tabs" id="myTab">
+				<li class="active">	<a href="#cfeed" data-toggle="tab" title="Feed">Create Feed</a></li>
+				<li> <a href="#youtube" data-toggle="tab" title="Youtube">Youtube</a></li>
+			</ul>
+			<div class="tab-content">
+				<div class="tab-pane fade in active" id="cfeed">
+					<form>
+						<div class="form-group">
+						  <label for="listname">List name</label>
+						  <input type="text" class="form-control" name="listname" id="listname" placeholder="Enter your listname">
+						</div>
+						<div class="form-group">
+						  <label for="datepicker">Deadline</label>
+						  <input  type="text" class="form-control" name="datepicker" id="datepicker" placeholder="Pick up a date">
+						</div>
+						<div class="form-group">
+							<label for="datepicker">Add a list item</label>
+							<div class="input-group">
+							  <input type="text" class="form-control" placeholder="Add an item" aria-label="Search for...">
+							  <span class="input-group-btn">
+								<button class="btn btn-secondary" type="button">Go!</button>
+							  </span>
+							</div>
+						</div>
+						<div class="form-group text-center">
+							<button type="submit" class="btn btn-block btn-primary">Sign in</button>
+						</div>
+					</form>
+				</div>
+				<div class="tab-pane fade" id="youtube">
+					<form>
+						<div class="form-group">
+							<label for="datepicker">Add a list item</label>
+							<div class="input-group">
+							  <input type="text" class="form-control" placeholder="Enter youtube Url" aria-label="Search for...">
+							  <span class="input-group-btn">
+								<button class="btn btn-secondary" type="button">Fetch Youtube Data</button>
+							  </span>
+							</div>
+						</div>
+						
+						<div class="form-group">
+						  <label for="videotitle">Video Title</label>
+						  <input type="text" class="form-control" name="videotitle" id="videotitle" placeholder="Video Title">
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
     </div>
   </div>
 </div>
