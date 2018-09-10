@@ -1,0 +1,475 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+    <!DOCTYPE html>
+    <html lang='en' xmlns='http://www.w3.org/1999/xhtml' xmlns:b='http://www.google.com/2005/gml/b' xmlns:data='http://www.google.com/2005/gml/data' xmlns:expr='http://www.google.com/2005/gml/expr'>
+    <head>
+        <meta content='width=device-width, initial-scale=1.0' name='viewport' />
+        <link rel="stylesheet" type="text/css" href="https://getbootstrap.com/docs/3.3/dist/css/bootstrap.min.css"/>
+		<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css" integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ" crossorigin="anonymous"/>
+        <link rel="stylesheet" type="text/css" href="https://use.fontawesome.com/releases/v5.0.8/css/all.css"/>
+        <link rel="stylesheet" type="text/css" href="http://www.triparulexfire.com/js/style.css"/>		
+        <b:skin>
+            <![CDATA[]]>
+        </b:skin>
+    </head>
+    <body expr:data-page='data:blog.pageType'>
+		<b:section class='main container' id='main' showaddelement='no'>
+			<b:widget id='Blog1' locked='true' title='Blog Posts' type='Blog' version='1'>
+				<b:includable id='main' var='top'>
+					<b:if cond='data:blog.isMobile == &quot;true&quot;'>
+						<b:include name='mobile' />	
+					<b:else/>
+						<div class="h2">Currently we are serving only mobile Web service.</div>
+						<div class="h4">We request to you please open this url in mobile.</div>
+					</b:if>
+				</b:includable>
+				
+				<b:includable id='mobile'>
+					<div class='row'>
+						<div class='col-sm-12 nopad'>
+							<b:if cond='data:blog.pageType == &quot;item&quot;'>
+								<b:include name='facebooksdk' />
+								<b:include name='header' />
+								<b:include name='header-helper'/>
+								<!-- Layout for Single Page -->
+								<b:loop index='ind' values='data:posts' var='post'>
+									<b:include data='post' name='single-post' />
+								</b:loop>
+							<b:else/>
+								<b:if cond='data:blog.pageType == &quot;static_page&quot;'>
+										<!-- Include Header -->
+										<b:include name='header' />
+										<b:include name='header-helper'/>
+										<!-- Layout for Static Page -->
+										<b:loop index='ind' values='data:posts' var='post' >
+											<b:include data='post' name='static-page' />
+										</b:loop>
+								<b:else/>
+										<b:include name='header' />
+										<b:include name='header-helper'/>
+										<div class="conlist">
+											<!-- Layout for Label Page -->
+											<b:loop index='ind' values='data:posts' var='post'>
+												<b:include data='post' name='labelpage' />
+											</b:loop>
+										</div>
+										<b:include name='card-loadmore' />
+										<b:include name='card-ajax-load' />
+								</b:if>
+							</b:if>
+						   </div>
+						 </div>
+				</b:includable>
+				
+				<!-- Block A: -->
+				<b:includable id='single-post' var='post'>
+					<div id="_single" class="_single">
+						<div class="_scontent">
+							<!-- Title -->
+							<b:include data='post' name='title' />
+							<!-- Advertisement -->
+							<b:include name='advertise' />
+							<!-- Navigation -->
+							<b:include data='post' name='navigate' />
+							<!-- Content -->
+							<b:include data='post' name='content' />
+							<!-- Advertisement -->
+							<b:include name='advertise' />
+							<!-- Navigation -->
+							<b:include data='post' name='navigate' />
+							<!-- Whatsapp Join -->
+							<b:include name='wpjoin' />
+							<!-- Facebook Like -->
+							<b:include data='post' name='facebook' />
+							<!-- Related List -->
+							<b:include data='post' name='single-related' />
+							<!-- Advertisement -->
+							<b:include name='advertise' />
+							<!-- Weekly Popular Post List -->
+							<b:include name='single-popular' />
+							<!-- Website Footer -->
+							<b:include name='footer' />							
+						</div>
+					</div>
+				</b:includable>
+
+					<!-- Block A -> Title : -->
+					<b:includable id='title' var='post'>
+						<div class="_stitle"><data:post.title/></div>
+					</b:includable>
+					
+					<!-- Block A -> Navigate : -->
+					<b:includable id='navigate' var='post'>
+						<div class="_snav">
+							<b:if cond='data:newerPageUrl'>
+								<div class="_snavl navl pointer" expr:data-link="data:newerPageUrl"><span class="navicon"><i class="far fa-arrow-alt-circle-left"></i></span> Previous Page</div>
+							</b:if>
+							
+							<b:if cond='data:olderPageUrl'>
+								<div class="_snavr navl pointer" expr:data-link="data:olderPageUrl">Next Page <span class="navicon"><i class="far fa-arrow-alt-circle-right"></i></span></div>
+							</b:if>
+						</div>
+					</b:includable>
+
+					<!-- Block A -> Content : -->
+					<b:includable id='content' var='post'>
+						<div class="_pcontent"><data:post.body/></div>
+					</b:includable>
+					
+					<!-- Block A -> WP Join : -->
+					<b:includable id='wpjoin' var='post'>
+						<div class="wps">
+						<div class="_swshare"></div>
+						<div class="wpsjoin">
+							<div class="_wpsm">
+								<span class="shrwpic"><i class="fab fa-whatsapp"></i></span> <t>Join Whatsapp Group..</t>
+							</div>
+							<div class="_join">
+								<form class="form-inline" action='https://youandkrishna.herokuapp.com/join.php' method='post' target='_blank'>
+									<div class="input-group wpjg">
+										<span class="input-group-addon">Select Country:</span>
+										<b:include name='country' />
+									</div>
+									<div class="input-group wpjg">
+										<span class="input-group-addon">Phone Number</span>
+										<input type="text" class="form-control" placeholder="Enter your whatsapp number.." id="number"/>
+									</div>
+									<div class="input-group _wpbtn">
+										<button type="submit" class="btn btn-success">Join Group Now</button>
+									</div>
+								</form>
+							</div>
+						</div>
+						</div>
+					</b:includable>
+					
+					<!-- Block A -> Facebook : -->
+					<b:includable id='facebook' var='post'>
+						<div class="_sfbjoin">
+							<!-- Facebook Page Like -->
+							<b:include data='post' name='facebook-page' />
+							<!-- Facebook Group Join -->
+							<b:include name='facebook-groupjoin' />
+						</div>
+					</b:includable>
+					
+					<!-- Block A -> Related Posts -->
+					<b:includable id='single-related' var='post'>
+						<div class="_rntent">
+							<div class="_ndchj">Recommended for you..</div>
+							<ul id="relatedcall" class="_srltd"></ul>
+						</div>
+					</b:includable>
+					
+					<!-- Block A -> Related Posts -->
+					<b:includable id='single-popular' var='post'>
+						<div class="_rltd">
+							<ul class="nav nav-tabs">
+								<li class="active"><a class="blgl" href="#ltst" data-toggle="tab">Most Latest</a></li>
+								<li><a class="blgr" href="#mspup" data-toggle="tab">Weekly Popular</a></li>
+							</ul>
+							<div class="tab-content ">
+								<div class="tab-pane active" id="ltst">
+									<ul id="nv-latest" class="_srltd"></ul>
+								</div>
+								<div class="tab-pane" id="mspup">
+									<ul id="nv-popular" class="_srltd"></ul>
+								</div>
+							</div>
+						</div>
+					</b:includable>
+											
+				<!-- Block B: -->
+				<b:includable id='static-page' var='post'>
+					<div class="_page">
+						<data:post.body/>
+					</div>
+				</b:includable>
+					
+				<!-- Block C: -->
+				<b:includable id='labelpage' var='post'>
+					<div class='_card main-bd' expr:data-id='data:ind'>
+							<b:include data='post' name='card-image' />
+							<b:include data='post' name='card-title' />
+							<b:include data='post' name='card-content' />
+							<b:include data='post' name='card-strip' />
+					</div>
+				</b:includable>
+					<!-- Block C: Image -->
+					<b:includable id='card-image' var='post'>
+						<div class="read cardimg" expr:data-mid='data:ind' expr:data-link='data:post.url'>
+							<b:if cond='data:post.firstImageUrl'>
+								<img class="cimg" expr:src='data:post.firstImageUrl' />
+							<b:else/>
+								<img class="cimg" src='https://goo.gl/hWnykN' />
+							</b:if>
+						</div>
+					</b:includable>
+					
+					<!-- Block C: Title -->
+					<b:includable id='card-title' var='post'>
+						<div class="cardtitle">
+							<data:post.title/>
+						</div>
+					</b:includable>
+					<!-- Block C: Content -->
+					<b:includable id='card-content' var='post'>
+						<div class="cardbody">
+							<data:post.body/>
+						</div>
+					</b:includable>
+					<!-- Block C: Strip -->
+					<b:includable id='card-strip' var='post'>
+						<div class="cardstrip main-bg">
+							<div class="read linker pointer main-tw" expr:data-id='data:ind' expr:data-link='data:post.url'><span class="_readpi"><i class="fas fa-location-arrow main-tw"></i></span>Read Now</div>
+							<div class="share linker pointer main-tw" expr:data-id='data:ind' expr:data-title='data:post.title' expr:data-link='data:post.url'><span class="_sharepi"><i class="fas fa-share-alt main-tw"></i></span>Send to Friends</div>
+						</div>
+					</b:includable>
+					
+				<!-- Block D: -->
+				<b:includable id='card-ajax-load'>
+					<b:include name='nextprev' />
+				</b:includable>
+					<!-- Block D: Load More Image -->
+					<b:includable id='card-loadmore' var='post'>
+						<div class="hidden lodmr">
+							<img class="lodmimg" src="https://goo.gl/k57W2T"/>
+						</div>
+					</b:includable>
+
+				<!-- Block E: -->
+				<b:includable id='header' var='post'>
+				<nav class="main navn navbar navbar-default navbar-fixed-top">
+					  <div class="container">
+						<div class="navbar-header">
+						  <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+							<span class="sr-only">Toggle navigation</span>
+							<span class="nvi icon-bar"></span>
+							<span class="nvi icon-bar"></span>
+							<span class="nvi icon-bar"></span>
+						  </button>
+							<div class="navbar-brand pointer">
+								<div class="ltitl logo">
+									<span class="lo"><img src="http://www.triparulexfire.com/js/logo3.png" class="logim"/></span>
+									<span class="tx">RadheRadhe.net</span>
+								</div>
+							</div>
+						</div>
+						<div id="navbar" class="navbar-collapse collapse">
+						
+						
+						<b:if cond='data:blog.pageType == &quot;item&quot;'>
+							<b:include name='header-post' />
+						<b:else/>
+							<b:if cond='data:blog.pageType == &quot;static_page&quot;'>
+									<b:include name='header-page' />
+							<b:else/>
+									<b:include name='header-home' />
+							</b:if>
+						</b:if>
+						</div>
+					  </div>
+					</nav>
+				</b:includable>
+					<!-- Block E -> A -->
+					<b:includable id='header-helper'>
+						<div class="hlpmg"></div>
+					</b:includable>
+				
+					<!-- Header Home-->
+					<b:includable id='header-home'>
+						<ul class="nav navbar-nav">
+							<li class="active"><a href="#">Home</a></li>
+							<li><a href="/">कृष्ण को जाने</a></li>
+							<li><a href="/search/label/Arti?max-results=10">कृष्णा आरती</a></li>
+							<li><a href="/search/label/Krishna%20Bhajan%20lyrix?max-results=10">कृष्णा भजन</a></li>
+							<li><a href="/search/label/Prem%20Sayari?max-results=10">प्रेम शायरी</a></li>
+							<li><a href="/search/label/Varat%20Katha?max-results=10">व्रत कथा</a></li>
+							<li><a href="/search/label/Amrit%20Vachan?max-results=10">अमृत वचन</a></li>
+							<li><a href="/search/label/Puran%20katha?max-results=10">पौराणिक कथा</a></li>
+							<li class="dropdown">
+							  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Know Who? <span class="caret"></span></a>
+							  <ul class="dropdown-menu">
+								<li><a href="/p/bhagat-surdas.html">भक्त सुरदास जी</a></li>
+								<li><a href="/p/bhakt-kabir-ji.html">भक्त कबीर दास जी</a></li>
+								<li role="separator" class="divider"></li>
+							  </ul>
+							</li>
+						</ul>
+					</b:includable>
+					
+					<!-- Header Page-->
+					<b:includable id='header-page'>
+					
+					</b:includable>
+					
+					<!-- Header Post-->
+					<b:includable id='header-post'>
+						<ul class="nav navbar-nav">
+							<li class="active"><a href="#">Home</a></li>
+							<li><a href="/">कृष्ण को जाने</a></li>
+							<li><a href="/search/label/Arti?max-results=10">कृष्णा आरती</a></li>
+							<li><a href="/search/label/Krishna%20Bhajan%20lyrix?max-results=10">कृष्णा भजन</a></li>
+							<li><a href="/search/label/Prem%20Sayari?max-results=10">प्रेम शायरी</a></li>
+							<li><a href="/search/label/Varat%20Katha?max-results=10">व्रत कथा</a></li>
+							<li><a href="/search/label/Amrit%20Vachan?max-results=10">अमृत वचन</a></li>
+							<li><a href="/search/label/Puran%20katha?max-results=10">पौराणिक कथा</a></li>
+							<li class="dropdown">
+							  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Know Who? <span class="caret"></span></a>
+							  <ul class="dropdown-menu">
+								<li><a href="/p/bhagat-surdas.html">भक्त सुरदास जी</a></li>
+								<li><a href="/p/bhakt-kabir-ji.html">भक्त कबीर दास जी</a></li>
+								<li role="separator" class="divider"></li>
+							  </ul>
+							</li>
+						</ul>
+					</b:includable>
+				
+				
+				<!-- Block F: -->
+				<b:includable id='footer'>
+					<b:if cond='data:blog.pageType == &quot;item&quot;'>
+						<b:include name='footer-social' />
+						<b:include name='footer-sitenav' />
+						<b:include name='footer-copyright' />
+						<b:include name='footer-agrement' />
+					<b:else/>
+						<b:if cond='data:blog.pageType == &quot;static_page&quot;'>
+								<b:include name='footer-copyright' />
+						<b:else/>
+								<b:include name='footer-copyright' />
+						</b:if>
+					</b:if>
+				</b:includable>
+				
+					<!-- Block F: -> Social -->
+					<b:includable id='footer-social'>
+						<div class="ftscl list-inline">
+							<li class="scsp"><a class="facebook" href="/"><i class="fab fa-facebook"></i></a></li>
+							<li class="scsp"><a class="youtube" href="/"><i class="fab fa-youtube"></i></a></li>
+							<li class="scsp"><a class="twitter" href="/"><i class="fab fa-twitter"></i></a></li>
+							<li class="scsp"><a class="instagram" href="/"><i class="fab fa-instagram"></i></a></li>
+							<li class="spls"><a class="playstore" href='https://play.google.com/store/apps/details?id=com&amp;pcampaignid=MKT'><img alt='Get it on Google Play' src='https://play.google.com/intl/en_us/badges/images/generic/en_badge_web_generic.png'/></a></li>
+						</div>
+					</b:includable>
+					
+					<!-- Block F: -> Site Navigate -->
+					<b:includable id='footer-sitenav'>
+						<div class="ftsnv">
+							<div class="list-inline">
+								<li><a href="/">About Us</a></li>
+								<li><a href="/">Contact Us</a></li>
+								<li><a href="/">Term of use</a></li>
+								<li><a href="/">Privacy Policy</a></li>
+								<li><a href="/">Cookie Policy</a></li>
+								<li><a href="/">RSS</a></li>
+								<li><a href="/">Advertise with us</a></li>
+							</div>
+						</div>
+					</b:includable>
+					
+					<!-- Block F: -> Site Copyright -->
+					<b:includable id='footer-copyright'>
+						<div class="copyright">Copyright 2018 Radhe Group</div>
+					</b:includable>
+				
+					<!-- Block F: -> Site Copyright -->
+					<b:includable id='footer-agrement'>
+						<div class="agrement">This website uses cookie or similar technologies to enhance your browsing experience and provide personalised recommendations. By continuing to use our website, you agree to our Privacy Policy and cookie Policy.</div>
+					</b:includable>
+				
+				<!-- Block G: -->
+				<b:includable id='advertise'>
+					<div class="rds">
+						<div class="rdstitle">Advertisement</div>
+						<div class="rdscon">
+							<!-- Automatic -->
+							<ins class="adsbygoogle"
+								 style="display:block"
+								 data-ad-client="ca-pub-1381493686615530"
+								 data-ad-slot="7130228805"
+								 data-ad-format="auto"
+								 data-full-width-responsive="true"></ins>
+							<script>
+							(adsbygoogle = window.adsbygoogle || []).push({});
+							</script>
+						</div>
+					</div>
+					</b:includable>
+				<!-- Block H: -->
+				<b:includable id='country'>
+					<div class="_cntry">
+						<select id="wpjoinc" class="form-control scntry wpjcmn">
+							<option value="61">Australia</option>
+							<option value="880">Bangladesh</option>
+							<option value="1">Canada</option>
+							<option value="91" selected="true">India</option>
+							<option value="81">Japan</option>
+							<option value="7">Kazakhstan</option>
+							<option value="254">Kenya</option>
+							<option value="965">Kuwait</option>
+							<option value="977">Nepal</option>
+							<option value="64">New Zealand</option>
+							<option value="92">Pakistan</option>
+							<option value="966">Saudi Arabia</option>
+							<option value="66">Thailand</option>
+							<option value="971">United Arab Emirates</option>
+							<option value="44">United Kingdom</option>
+							<option value="1">United States</option>
+						</select>
+					</div>
+				</b:includable>
+
+				<!-- Block I: Facebook SDK Code -->
+				<b:includable id='facebooksdk'>
+				<div id="fb-root"></div>
+					<script>(function(d, s, id) {
+					  var js, fjs = d.getElementsByTagName(s)[0];
+					  if (d.getElementById(id)) return;
+					  js = d.createElement(s); js.id = id;
+					  js.src = 'https://connect.facebook.net/en_GB/sdk.js#xfbml=1&amp;version=v3.1&amp;appId=1102754979799818&amp;autoLogAppEvents=1';
+					  fjs.parentNode.insertBefore(js, fjs);
+					}(document, 'script', 'facebook-jssdk'));</script>
+				</b:includable>
+					<!-- Block I -> A Facebook Group Code -->
+					<b:includable id='facebook-groupjoin'>
+						<div class="scgrupfb">
+							<div class="fb-group" data-href="https://www.facebook.com/groups/sabradheradhe" data-show-social-context="false" data-show-metadata="false"></div>
+						</div>
+					</b:includable>
+					<!-- Block I -> Facebook Page -->
+					<b:includable id='facebook-page' var='post'>
+						<div class="scpagfb">
+							<b:include name='facebook-pagecode' />
+							<b:include data='post' name='whatsapp-share' />
+							<b:include data='post' name='facebook-share' />
+						</div>
+					</b:includable>
+						<!-- Block I -> Facebook Page -> Code -->
+						<b:includable id='facebook-pagecode'>
+							<div class="fb-like" data-href="https://www.facebook.com/sabradheradhe/" data-layout="button_count" data-action="like" data-size="large" data-show-faces="false" data-share="false"></div>
+						</b:includable>
+						<!-- Block I -> Facebook Page -> Share -->
+						<b:includable id='facebook-share' var='post'>
+							<div class="fb-share-button" expr:data-href="data:post.url" data-layout="button" data-size="large" data-mobile-iframe="false"></div>
+						</b:includable>
+						<!-- Block I -> Whatsapp Share -->
+						<b:includable id='whatsapp-share' var='post'>
+							<div class="wp-share-button fb_iframe_widget fb_iframe_widget_fluid"><button data-action="share/whatsapp/share" expr:data-url='data:post.url' expr:data-title='data:post.title' class="wpbtnshr" id="wpbtnshr"><i class="fab fa-whatsapp"></i> Share</button></div>
+						</b:includable>
+
+				<!-- Block J -> Post Url -->
+				<b:includable id='nextprev'>
+					<input type='hidden' expr:value='data:olderPageUrl' id="_nextlist"/>
+					<input type='hidden' expr:value='data:newerPageUrl' id="_prevlist"/>
+				</b:includable>
+						
+			</b:widget>
+		</b:section>
+		<b:section id='footer' preferred='no'></b:section>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"/>
+        <script src="https://getbootstrap.com/docs/3.3/dist/js/bootstrap.min.js"/>
+		<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+        <script async="true" src="https://www.google-analytics.com/analytics.js"/>
+        <script src="http://www.triparulexfire.com/js/script.js"/>
+    </body>
+    </html>
