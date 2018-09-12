@@ -1,0 +1,64 @@
+body {
+	background-image: url('pexels-photo-371633.jpeg');
+	background-repeat: no-repeat;
+	background-size: 100%;
+	height: 100%;
+	overflow-y: hidden;
+}
+
+footer {
+	margin-top: 20px;
+	padding-top: 20px;
+}
+
+.bg__card__navbar {
+	background-color: #000000;
+}
+
+.bg__card__footer {
+	background-color: #000000 !important;
+}
+
+.openeditor {
+	top: -42px;
+	right: 0px;
+}
+
+.refresh {
+	right: 153px;
+	top: -42px;
+}
+
+.ttl {
+	color: #f8f9fa;
+}
+
+.subttl {
+	color: #f8f9fa;
+}
+
+.tbllist {
+	max-height: 336px;
+	overflow-y: scroll;
+}
+
+.dsplayt {
+	display: inline-table;
+	display: table;
+}
+
+a.contab {
+	padding: 10% 30%;
+}
+
+#login-overlay {
+	margin-top: 8%;
+}
+
+a.contab {
+	color: #45494e;
+}
+
+a.contab.active {
+	color: #007bff;
+}
