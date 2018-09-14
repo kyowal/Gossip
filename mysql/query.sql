@@ -11,6 +11,7 @@ CREATE TABLE users (
 	expire_time datetime COMMENT 'Time when this access token will expire',
 	today_count int DEFAULT 0 COMMENT 'How much Article posted by this user today',
 	lifetime_count int DEFAULT 0 COMMENT 'How much Article posted by this user lifetime',
+	enabled BOOLEAN NOT NULL DEFAULT 0 COMMENT 'This set user is enabled or not. Default Disabled',
 	PRIMARY KEY (id)
 );
 
